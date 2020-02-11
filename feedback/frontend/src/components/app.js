@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import Table from './table';
 
-class App extends Component {
-    render() {
-        return <h1>React App</h1>
-    }
-}
-
+const App = () => (
+  <>
+    <h1>React App</h1>
+    <Table />
+  </>
+);
 ReactDOM.render(<App />, document.getElementById('app'));

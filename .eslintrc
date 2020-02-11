@@ -1,0 +1,11 @@
+{
+  "extends": ["wesbos"],
+  "globals": {
+    "cy": true
+  },
+  "rules": {
+    "no-console": 2,
+    "no-unused-vars": 2,
+    "react/prefer-stateless-function": 2
+  }
+}
