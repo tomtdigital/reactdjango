@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Assignments from './assignments';
 import {
-  BrowserRouter,
+  HashRouter,
   Switch,
   Route,
   Link
 } from "react-router-dom";
 
 const App = () => (
-  <BrowserRouter>
+  <HashRouter>
         <Link to="/">Home</Link>
         <Link to="/subjects">Subjects</Link>
         <Link to="/assignments">Assignments</Link>
@@ -24,6 +24,6 @@ const App = () => (
           <Assignments />
         </Route>
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 );
 ReactDOM.render(<App />, document.getElementById('app'));
