@@ -1,11 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Table from './table';
+import Assignments from './assignments';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const App = () => (
-  <>
-    <h1>Assignments</h1>
-    <Table />
-  </>
+  <BrowserRouter>
+        <Link to="/">Home</Link>
+        <Link to="/subjects">Subjects</Link>
+        <Link to="/assignments">Assignments</Link>
+    <Switch>
+      <Route exact path="/">
+        <p>Homepage</p>
+        </Route>
+        <Route path="/subjects">
+          <p>Coming soon</p>
+        </Route>
+        <Route path="/assignments">
+          <Assignments />
+        </Route>
+    </Switch>
+  </BrowserRouter>
 );
 ReactDOM.render(<App />, document.getElementById('app'));

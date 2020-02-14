@@ -11,7 +11,7 @@ const StyledTable = styled.table`
   border-collapse: collapse;
 `;
 
-const Table = () => {
+const Assignments = () => {
   const [assignments, setAssignments] = useState();
   const [assignmentSubject, setassignmentSubject] = useState();
   const [assignmentTitle, setAssignmentTitle] = useState();
@@ -64,6 +64,7 @@ const handleSubmit = () => {
 console.log(assignments);
   return (
   <>
+  <h1>Assignments</h1>
   {assignments && assignments.length > 0 ? (
     <StyledTable>
     <thead>
@@ -104,8 +105,8 @@ console.log(assignments);
 );
 };
 
-// Table.propTypes = {
+// Assignments.propTypes = {
 //   data: PropTypes.array,
 // };
 
-export default Table;
+export default Assignments;
