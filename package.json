@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --watch ./feedback/frontend/src/index.js --output ./feedback/frontend/static/frontend/main.js",
+    "serve": "python feedback/manage.py runserver",
     "build": "webpack --mode production ./feedback/frontend/src/index.js --output ./feedback/frontend/static/frontend/main.js"
   },
   "keywords": [],
