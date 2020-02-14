@@ -28,7 +28,7 @@ const Assignments = () => {
       .catch(function(error) {
         console.log(error);
       });
-  });
+  }, []);
 
   const handleClick = id => {
     axios({
