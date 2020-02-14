@@ -17,7 +17,7 @@ const Assignments = () => {
   const [assignmentSubject, setassignmentSubject] = useState();
   const [assignmentTitle, setAssignmentTitle] = useState();
   const [assignmentDescription, setAssignmentDescription] = useState();
-  useEffect(() => {
+  const getAssignments = () => {
     axios({
       method: 'get',
       url: '/api/assignments',
@@ -28,22 +28,22 @@ const Assignments = () => {
       .catch(function(error) {
         console.log(error);
       });
-  }, []);
+  };
 
-  const handleClick = id => {
+  const deleteAssignments = id => {
     axios({
       method: 'delete',
       url: `/api/assignments/${id}`,
     })
       .then(function(response) {
-        console.log(response);
+        getAssignments();
       })
       .catch(function(error) {
         console.log(error);
       });
   };
 
-  const handleSubmit = () => {
+  const postAssignments = () => {
     axios({
       method: 'post',
       url: '/api/assignments/',
@@ -55,6 +55,7 @@ const Assignments = () => {
     })
       .then(function(response) {
         console.log(response);
+        getAssignments();
         setassignmentSubject('');
         setAssignmentTitle('');
         setAssignmentDescription('');
@@ -62,6 +63,18 @@ const Assignments = () => {
       .catch(function(error) {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    getAssignments();
+  }, []);
+
+  const handleClick = id => {
+    deleteAssignments(id);
+  };
+
+  const handleSubmit = () => {
+    postAssignments();
   };
   return (
     <>
