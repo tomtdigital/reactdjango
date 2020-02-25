@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "shell": "pipenv shell",
+    "serve": "python feedback/manage.py runserver",
     "dev": "webpack --mode development --watch ./feedback/frontend/src/index.js --output ./feedback/frontend/static/frontend/main.js",
     "build": "webpack --mode production ./feedback/frontend/src/index.js --output ./feedback/frontend/static/frontend/main.js"
   },
