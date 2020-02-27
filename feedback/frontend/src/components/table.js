@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getAssignments } from '../actions/assignments';
 
 const StyledTable = styled.table`
   thead tr th,
@@ -12,8 +13,7 @@ const StyledTable = styled.table`
   border-collapse: collapse;
 `;
 
-const Table = () => {
-  const [assignments, setAssignments] = useState();
+const Table = ({ assignments }) => {
   const [assignmentSubject, setassignmentSubject] = useState();
   const [assignmentTitle, setAssignmentTitle] = useState();
   const [assignmentDescription, setAssignmentDescription] = useState();
@@ -63,7 +63,7 @@ const Table = () => {
     // });
     console.log('submitted');
   };
-  // console.log(assignments);
+  console.log(assignments);
   return (
     <>
       {assignments && assignments.length > 0 ? (
@@ -83,12 +83,7 @@ const Table = () => {
                 <td>{assignment.title}</td>
                 <td>{assignment.description}</td>
                 <td>
-                  <button
-                    type="button"
-                    onClick={() => handleClick(assignment.id)}
-                  >
-                    Delete
-                  </button>
+                  <button type="button">Delete</button>
                 </td>
               </tr>
             ))}
@@ -136,8 +131,12 @@ const Table = () => {
   );
 };
 
-// Table.propTypes = {
-//   data: PropTypes.array,
-// };
+Table.propTypes = {
+  assignments: PropTypes.array.isRequired,
+};
 
-export default Table;
+const mapStateToProps = state => ({
+  assignments: state.assignments.assignments,
+});
+
+export default connect(mapStateToProps, getAssignments)(Table);
