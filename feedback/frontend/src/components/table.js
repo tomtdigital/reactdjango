@@ -1,142 +1,66 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getAssignments } from '../actions/assignments';
+import PropTypes from 'prop-types';
+import { getAssignments, deleteAssignment } from '../actions/assignments';
 
-const StyledTable = styled.table`
-  thead tr th,
-  tbody tr td {
-    border: 1px solid black;
-    padding: 1em;
+export class Table extends Component {
+  componentDidMount() {
+    const { getAssignments } = this.props;
+    getAssignments();
+    console.log(this.props);
   }
-  border-collapse: collapse;
-`;
 
-const Table = ({ assignments }) => {
-  const [assignmentSubject, setassignmentSubject] = useState();
-  const [assignmentTitle, setAssignmentTitle] = useState();
-  const [assignmentDescription, setAssignmentDescription] = useState();
-  //   useEffect(()=>{
-  //     axios({
-  //       method: 'get',
-  //       url: '/api/assignments',
-  //     })
-  //     .then(function (response) {
-  //       setAssignments(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  //   });
-
-  //   const handleClick = id => {
-  //     axios({
-  //       method: 'delete',
-  //       url: `/api/assignments/${id}`,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response)
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //   });
-  // };
-
-  const handleSubmit = () => {
-    //   axios({
-    //     method: 'post',
-    //     url: '/api/assignments/',
-    //     data: {
-    //       subject: assignmentSubject,
-    //       title: assignmentTitle,
-    //       description: assignmentDescription
-    //     }
-    //   }).then(function (response) {
-    //     console.log(response)
-    //     setassignmentSubject('')
-    //     setAssignmentTitle('')
-    //     setAssignmentDescription('')
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    // });
-    console.log('submitted');
-  };
-  console.log(assignments);
-  return (
-    <>
-      {assignments && assignments.length > 0 ? (
-        <StyledTable>
+  render() {
+    return (
+      <>
+        <h2>Assignment</h2>
+        <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Subject</th>
               <th>Title</th>
               <th>Description</th>
-              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {assignments.map((assignment, index) => (
-              <tr key={index}>
+            {this.props.assignments.map(assignment => (
+              <tr key={assignment.id}>
+                <td>{assignment.id}</td>
                 <td>{assignment.subject}</td>
                 <td>{assignment.title}</td>
                 <td>{assignment.description}</td>
                 <td>
-                  <button type="button">Delete</button>
+                  <button
+                    onClick={this.props.deleteAssignment.bind(
+                      this,
+                      assignment.id
+                    )}
+                    className="btn btn-danger btn-sm"
+                  >
+                    {' '}
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </StyledTable>
-      ) : (
-        <p>Fill out the form to create an assignment</p>
-      )}
-
-      <br />
-      <h2>Create Assignment</h2>
-      <form>
-        <label htmlFor="subject">
-          Subject
-          <input
-            id="subject"
-            name="subject"
-            onChange={e => setassignmentSubject(e.target.value)}
-            value={assignmentSubject}
-          />
-        </label>
-        <label htmlFor="title">
-          Title
-          <input
-            id="title"
-            name="title"
-            onChange={e => setAssignmentTitle(e.target.value)}
-            value={assignmentTitle}
-          />
-        </label>
-        <label htmlFor="description">
-          Description
-          <input
-            id="description"
-            name="description"
-            onChange={e => setAssignmentDescription(e.target.value)}
-            value={assignmentDescription}
-          />
-        </label>
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </form>
-    </>
-  );
-};
+        </table>
+      </>
+    );
+  }
+}
 
 Table.propTypes = {
   assignments: PropTypes.array.isRequired,
+  getAssignments: PropTypes.func.isRequired,
+  deleteAssignment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   assignments: state.assignments.assignments,
 });
 
-export default connect(mapStateToProps, getAssignments)(Table);
+export default connect(mapStateToProps, { getAssignments, deleteAssignment })(
+  Table
+);
