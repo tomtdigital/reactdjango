@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addAssignment } from '../../actions/assignments';
+import Label from '../atoms/label';
 
-export const NewAssignmentForm = ({ connectAddAssignment }) => {
+export const NewAssignmentForm = ({ addAssignmentRdx }) => {
   const [subject, setSubject] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
@@ -17,22 +18,22 @@ export const NewAssignmentForm = ({ connectAddAssignment }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const assignment = { subject, title, description };
-    connectAddAssignment(assignment);
+    addAssignmentRdx(assignment);
     resetForm();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="subject">
-        subject
+      <Label htmlFor="subject">
+        Subject
         <input
           id="subject"
           name="subject"
           onChange={e => setSubject(e.target.value)}
           value={subject || ''}
         />
-      </label>
-      <label htmlFor="title">
+      </Label>
+      <Label htmlFor="title">
         Title
         <input
           id="title"
@@ -40,8 +41,8 @@ export const NewAssignmentForm = ({ connectAddAssignment }) => {
           onChange={e => setTitle(e.target.value)}
           value={title || ''}
         />
-      </label>
-      <label htmlFor="description">
+      </Label>
+      <Label htmlFor="description">
         Description
         <input
           id="description"
@@ -49,16 +50,16 @@ export const NewAssignmentForm = ({ connectAddAssignment }) => {
           onChange={e => setDescription(e.target.value)}
           value={description || ''}
         />
-      </label>
+      </Label>
       <button type="submit">Submit</button>
     </form>
   );
 };
 
 NewAssignmentForm.propTypes = {
-  connectAddAssignment: PropTypes.func.isRequired,
+  addAssignmentRdx: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
-  connectAddAssignment: addAssignment,
+  addAssignmentRdx: addAssignment,
 })(NewAssignmentForm);

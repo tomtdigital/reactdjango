@@ -6,39 +6,40 @@ import DataTable from '../molecules/data-table';
 
 export const AssignmentTable = ({
   assignments,
-  connectGetAssignments,
-  connectDeleteAssignment,
+  getAssignmentsRdx,
+  deleteAssignmentRdx,
 }) => {
   useEffect(() => {
-    connectGetAssignments();
-  }, [connectGetAssignments]);
+    getAssignmentsRdx();
+  }, [getAssignmentsRdx]);
 
   const tableData = {
-    columns: ['ID', 'subject', 'Title', 'Description'],
+    columns: ['Subject', 'Title', 'Description'],
     rows: assignments.map(assignment => ({
       id: assignment.id,
-      values: [
-        assignment.id,
-        assignment.subject,
-        assignment.title,
-        assignment.description,
-      ],
+      values: [assignment.subject, assignment.title, assignment.description],
     })),
   };
 
   return (
-    <DataTable
-      data={tableData}
-      deleteOption
-      deleteFunction={connectDeleteAssignment}
-    />
+    <>
+      {assignments.length > 0 ? (
+        <DataTable
+          data={tableData}
+          enableDeletion
+          onDeletion={deleteAssignmentRdx}
+        />
+      ) : (
+        <p>Please fill out the form to add an assignment >>></p>
+      )}
+    </>
   );
 };
 
 AssignmentTable.propTypes = {
   assignments: PropTypes.array.isRequired,
-  connectGetAssignments: PropTypes.func.isRequired,
-  connectDeleteAssignment: PropTypes.func.isRequired,
+  getAssignmentsRdx: PropTypes.func.isRequired,
+  deleteAssignmentRdx: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -46,6 +47,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  connectGetAssignments: getAssignments,
-  connectDeleteAssignment: deleteAssignment,
+  getAssignmentsRdx: getAssignments,
+  deleteAssignmentRdx: deleteAssignment,
 })(AssignmentTable);
