@@ -9,21 +9,21 @@ import {
 
 export const Table = ({
   assignments,
-  getAssignments,
-  addAssignment,
-  deleteAssignment,
+  connectGetAssignments,
+  connectAddAssignment,
+  connectDeleteAssignment,
 }) => {
   const [subject, setSubject] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   useEffect(() => {
-    getAssignments();
-  }, [getAssignments]);
+    connectGetAssignments();
+  }, [connectGetAssignments]);
 
   const handleSubmit = event => {
     event.preventDefault();
     const assignment = { subject, title, description };
-    addAssignment(assignment);
+    connectAddAssignment(assignment);
   };
 
   return (
@@ -47,7 +47,7 @@ export const Table = ({
               <td>{assignment.description}</td>
               <td>
                 <button
-                  onClick={() => deleteAssignment(assignment.id)}
+                  onClick={() => connectDeleteAssignment(assignment.id)}
                   type="button"
                 >
                   Delete
@@ -94,9 +94,9 @@ export const Table = ({
 
 Table.propTypes = {
   assignments: PropTypes.array.isRequired,
-  getAssignments: PropTypes.func.isRequired,
-  deleteAssignment: PropTypes.func.isRequired,
-  addAssignment: PropTypes.func.isRequired,
+  connectGetAssignments: PropTypes.func.isRequired,
+  connectDeleteAssignment: PropTypes.func.isRequired,
+  connectAddAssignment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -104,7 +104,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  getAssignments,
-  deleteAssignment,
-  addAssignment,
+  connectGetAssignments: getAssignments,
+  connectDeleteAssignment: deleteAssignment,
+  connectAddAssignment: addAssignment,
 })(Table);
