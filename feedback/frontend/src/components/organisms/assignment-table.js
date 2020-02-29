@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import DataTable from '../molecules/data-table';
+import PropTypes from 'prop-types';
 import { getAssignments, deleteAssignment } from '../../actions/assignments';
+import DataTable from '../molecules/data-table';
 
 export const AssignmentTable = ({
   assignments,
@@ -25,6 +25,7 @@ export const AssignmentTable = ({
       ],
     })),
   };
+
   return (
     <DataTable
       data={tableData}
