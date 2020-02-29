@@ -1,35 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAssignments, deleteAssignment } from '../actions/assignments';
+import {
+  getAssignments,
+  deleteAssignment,
+  addAssignment,
+} from '../actions/assignments';
 
-export const Table = ({ getAssignments, deleteAssignment, assignments }) => {
-  const [assignmentSubject, setassignmentSubject] = useState();
-  const [assignmentTitle, setAssignmentTitle] = useState();
-  const [assignmentDescription, setAssignmentDescription] = useState();
+export const Table = ({
+  assignments,
+  getAssignments,
+  addAssignment,
+  deleteAssignment,
+}) => {
+  const [subject, setSubject] = useState();
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
   useEffect(() => {
     getAssignments();
   }, [getAssignments]);
-  const handleSubmit = () => {
-    //   axios({
-    //     method: 'post',
-    //     url: '/api/assignments/',
-    //     data: {
-    //       subject: assignmentSubject,
-    //       title: assignmentTitle,
-    //       description: assignmentDescription
-    //     }
-    //   }).then(function (response) {
-    //     console.log(response)
-    //     setassignmentSubject('')
-    //     setAssignmentTitle('')
-    //     setAssignmentDescription('')
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    // });
-    console.log('submitted');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const assignment = { subject, title, description };
+    addAssignment(assignment);
   };
+
   return (
     <>
       <h2>Assignment</h2>
@@ -37,7 +33,7 @@ export const Table = ({ getAssignments, deleteAssignment, assignments }) => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Subject</th>
+            <th>subject</th>
             <th>Title</th>
             <th>Description</th>
           </tr>
@@ -62,14 +58,14 @@ export const Table = ({ getAssignments, deleteAssignment, assignments }) => {
         </tbody>
       </table>
       <h2>Create Assignment</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="subject">
-          Subject
+          subject
           <input
             id="subject"
             name="subject"
-            onChange={e => setassignmentSubject(e.target.value)}
-            value={assignmentSubject}
+            onChange={e => setSubject(e.target.value)}
+            value={subject || ''}
           />
         </label>
         <label htmlFor="title">
@@ -77,8 +73,8 @@ export const Table = ({ getAssignments, deleteAssignment, assignments }) => {
           <input
             id="title"
             name="title"
-            onChange={e => setAssignmentTitle(e.target.value)}
-            value={assignmentTitle}
+            onChange={e => setTitle(e.target.value)}
+            value={title || ''}
           />
         </label>
         <label htmlFor="description">
@@ -86,13 +82,11 @@ export const Table = ({ getAssignments, deleteAssignment, assignments }) => {
           <input
             id="description"
             name="description"
-            onChange={e => setAssignmentDescription(e.target.value)}
-            value={assignmentDescription}
+            onChange={e => setDescription(e.target.value)}
+            value={description || ''}
           />
         </label>
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
@@ -102,12 +96,15 @@ Table.propTypes = {
   assignments: PropTypes.array.isRequired,
   getAssignments: PropTypes.func.isRequired,
   deleteAssignment: PropTypes.func.isRequired,
+  addAssignment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   assignments: state.assignments.assignments,
 });
 
-export default connect(mapStateToProps, { getAssignments, deleteAssignment })(
-  Table
-);
+export default connect(mapStateToProps, {
+  getAssignments,
+  deleteAssignment,
+  addAssignment,
+})(Table);
