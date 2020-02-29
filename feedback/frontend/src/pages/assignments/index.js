@@ -6,6 +6,7 @@ import {
   deleteAssignment,
   addAssignment,
 } from '../../actions/assignments';
+import DataTable from '../../components/molecules/data-table';
 
 export const Assignments = ({
   assignments,
@@ -26,37 +27,27 @@ export const Assignments = ({
     connectAddAssignment(assignment);
   };
 
+  const tableData = {
+    columns: ['ID', 'subject', 'Title', 'Description'],
+    rows: assignments.map(assignment => ({
+      id: assignment.id,
+      values: [
+        assignment.id,
+        assignment.subject,
+        assignment.title,
+        assignment.description,
+      ],
+    })),
+  };
+
   return (
     <>
       <h2>Assignment</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>subject</th>
-            <th>Title</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map(assignment => (
-            <tr key={assignment.id}>
-              <td>{assignment.id}</td>
-              <td>{assignment.subject}</td>
-              <td>{assignment.title}</td>
-              <td>{assignment.description}</td>
-              <td>
-                <button
-                  onClick={() => connectDeleteAssignment(assignment.id)}
-                  type="button"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <DataTable
+        data={tableData}
+        deleteOption
+        deleteFunction={connectDeleteAssignment}
+      />
       <h2>Create Assignment</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="subject">
