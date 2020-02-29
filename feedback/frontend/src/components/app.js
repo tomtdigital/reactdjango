@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
-import Table from './table';
+import Assignments from '../pages/assignments/index';
 
 const App = () => (
   <Provider store={store}>
     <>
-      <h1>Assignments</h1>
-      <Table />
+      <h1>Test</h1>
+      <Assignments />
     </>
   </Provider>
 );

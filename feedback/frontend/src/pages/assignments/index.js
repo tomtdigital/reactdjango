@@ -5,9 +5,9 @@ import {
   getAssignments,
   deleteAssignment,
   addAssignment,
-} from '../actions/assignments';
+} from '../../actions/assignments';
 
-export const Table = ({
+export const Assignments = ({
   assignments,
   connectGetAssignments,
   connectAddAssignment,
@@ -92,7 +92,7 @@ export const Table = ({
   );
 };
 
-Table.propTypes = {
+Assignments.propTypes = {
   assignments: PropTypes.array.isRequired,
   connectGetAssignments: PropTypes.func.isRequired,
   connectDeleteAssignment: PropTypes.func.isRequired,
@@ -107,4 +107,4 @@ export default connect(mapStateToProps, {
   connectGetAssignments: getAssignments,
   connectDeleteAssignment: deleteAssignment,
   connectAddAssignment: addAssignment,
-})(Table);
+})(Assignments);
