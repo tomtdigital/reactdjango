@@ -20,8 +20,8 @@ const NavLi = styled.li`
 
 const NavLinks = ({ data }) => (
   <NavUL>
-    {data.map(item => (
-      <NavLi>
+    {data.map((item, index) => (
+      <NavLi key={index}>
         <Link to={item.path}>{item.text}</Link>
       </NavLi>
     ))}

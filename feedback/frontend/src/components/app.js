@@ -7,7 +7,7 @@ import HomePage from '../pages';
 import SubjectsPage from '../pages/subjects/index';
 import AssignmentsPage from '../pages/assignments/index';
 import HeaderNav from './organisms/header-nav';
-import css from '../styles/styles.css';
+import '../styles/styles.css';
 
 const App = () => (
   <Provider store={store}>
