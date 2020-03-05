@@ -14,6 +14,8 @@ class AssignmentsSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     subject = serializers.CharField()
+    inspect_subject = serializers.ReadOnlyField()
+
 
     def create(self, validated_data):
         get_subject = validated_data.pop('subject')

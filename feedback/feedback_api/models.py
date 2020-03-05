@@ -10,4 +10,8 @@ class Assignment(models.Model):
     subject = models.ForeignKey('Subject', default=None, null=True, on_delete=models.PROTECT, related_name='subject_asignment')
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
+
+    @property
+    def inspect_subject(self):
+        return {"subject_id": self.subject.id, "subject_name": self.subject.subject_name}
         

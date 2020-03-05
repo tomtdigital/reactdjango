@@ -17,9 +17,15 @@ export const AssignmentTable = ({
     columns: ['Subject', 'Title', 'Description'],
     rows: assignments.map(assignment => ({
       id: assignment.id,
-      values: [assignment.subject, assignment.title, assignment.description],
+      values: [
+        assignment.inspect_subject.subject_name,
+        assignment.title,
+        assignment.description,
+      ],
     })),
   };
+
+  assignments.forEach(assignment => console.log(assignment));
 
   return (
     <>
