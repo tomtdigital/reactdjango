@@ -3,9 +3,10 @@ from feedback_api.models import Subject, Assignment
 from django.shortcuts import get_object_or_404
 
 class SubjectsSerializer(serializers.ModelSerializer):
+    assignments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Subject
-        fields = '__all__'
+        fields = ['subject_name', 'assignments']
 
 class AssignmentsSerializer(serializers.ModelSerializer):
     
@@ -14,7 +15,7 @@ class AssignmentsSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     subject = serializers.CharField()
-    inspect_subject = serializers.ReadOnlyField()
+    # subject_id = serializers.ReadOnlyField()
 
 
     def create(self, validated_data):

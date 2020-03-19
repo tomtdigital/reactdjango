@@ -7,11 +7,11 @@ class Subject(models.Model):
         return "%s" % self.subject_name
 
 class Assignment(models.Model):
-    subject = models.ForeignKey('Subject', default=None, null=True, on_delete=models.PROTECT, related_name='subject_asignment')
+    subject = models.ForeignKey(Subject, related_name='assignments', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
 
-    @property
-    def inspect_subject(self):
-        return {"subject_id": self.subject.id, "subject_name": self.subject.subject_name}
+    # @property
+    # def subject_id(self):
+    #     return self.subject.id
         
