@@ -1,6 +1,11 @@
 import axios from 'axios';
-
-import { GET_ASSIGNMENTS, DELETE_ASSIGNMENT, ADD_ASSIGNMENT } from './types';
+import {
+  GET_ASSIGNMENTS,
+  DELETE_ASSIGNMENT,
+  ADD_ASSIGNMENT,
+  GET_ERRORS,
+} from './types';
+import { createMessage } from './messages';
 
 // GET ASSIGNMENTS
 export const getAssignments = () => dispatch => {
@@ -20,6 +25,7 @@ export const deleteAssignment = id => dispatch => {
   axios
     .delete(`/api/assignments/${id}/`)
     .then(() => {
+      dispatch(createMessage({ assignmentDeleted: 'Assignment deleted' }));
       dispatch({
         type: DELETE_ASSIGNMENT,
         payload: id,
@@ -38,5 +44,14 @@ export const addAssignment = assignment => dispatch => {
         payload: res.data,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status,
+      };
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors,
+      });
+    });
 };

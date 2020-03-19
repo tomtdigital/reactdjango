@@ -75,9 +75,9 @@ export const NewAssignmentForm = ({
               value={description || ''}
             />
           </Label>
-          {subject.length > 0 && title.length > 0 && description.length > 0 && (
-            <button type="submit">Submit</button>
-          )}
+          {/* {subject.length > 0 && title.length > 0 && description.length > 0 && ( */}
+          <button type="submit">Submit</button>
+          {/* )} */}
         </form>
       ) : (
         <p>
