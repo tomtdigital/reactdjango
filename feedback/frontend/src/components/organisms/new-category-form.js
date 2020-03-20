@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addCategory } from '../../actions/subjects';
+import { addCategory } from '../../actions/categories';
 import Label from '../atoms/label';
 
 export const NewCategoryForm = ({ addCategoryRdx }) => {

@@ -7,7 +7,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import Alerts from './organisms/alerts';
 import store from '../store';
 import HomePage from '../pages';
-import CategoryPage from '../pages/subjects/index';
+import CategoryPage from '../pages/categories/index';
 import AssignmentsPage from '../pages/assignments/index';
 import HeaderNav from './organisms/header-nav';
 import '../styles/styles.css';

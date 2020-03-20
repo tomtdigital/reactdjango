@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCategories, deleteCategory } from '../../actions/subjects';
+import { getCategories, deleteCategory } from '../../actions/categories';
 import DataTable from '../molecules/data-table';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
 

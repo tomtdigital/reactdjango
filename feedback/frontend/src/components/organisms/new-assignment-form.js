@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addAssignment } from '../../actions/assignments';
-import { getCategories } from '../../actions/subjects';
+import { getCategories } from '../../actions/categories';
 import Label from '../atoms/label';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
 
