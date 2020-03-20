@@ -1,27 +1,31 @@
-import { GET_SUBJECTS, DELETE_SUBJECT, ADD_SUBJECT } from '../actions/types.js';
+import {
+  GET_CATEGORIES,
+  DELETE_CATEGORY,
+  ADD_CATEGORY,
+} from '../actions/types.js';
 
 const initialState = {
-  subjects: [],
+  categories: [],
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_SUBJECTS:
+    case GET_CATEGORIES:
       return {
         ...state,
-        subjects: action.payload,
+        categories: action.payload,
       };
-    case DELETE_SUBJECT:
+    case DELETE_CATEGORY:
       return {
         ...state,
-        subjects: state.subjects.filter(
-          subject => subject.id !== action.payload
+        categories: state.categories.filter(
+          category => category.id !== action.payload
         ),
       };
-    case ADD_SUBJECT:
+    case ADD_CATEGORY:
       return {
         ...state,
-        subjects: [...state.subjects, action.payload],
+        categories: [...state.categories, action.payload],
       };
     default:
       return state;

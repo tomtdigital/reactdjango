@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from feedback_api.models import Subject, Assignment
+from feedback_api.models import Category, Assignment
 from django.shortcuts import get_object_or_404
 
-class SubjectsSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     assignments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
-        model = Subject
-        fields = ['subject_name', 'assignments']
+        model = Category
+        fields = ['id','category_name', 'assignments']
 
 class AssignmentsSerializer(serializers.ModelSerializer):
     
@@ -14,14 +14,14 @@ class AssignmentsSerializer(serializers.ModelSerializer):
         model = Assignment
         fields = '__all__'
     
-    subject = serializers.CharField()
-    # subject_id = serializers.ReadOnlyField()
+    category = serializers.CharField()
+    # category_id = serializers.ReadOnlyField()
 
 
     def create(self, validated_data):
-        get_subject = validated_data.pop('subject')
-        subject_instance, created = Subject.objects.get_or_create(subject_name=get_subject)
-        assignment_instance = Assignment.objects.create(**validated_data, subject=subject_instance)
+        get_category = validated_data.pop('category')
+        category_instance, created = Category.objects.get_or_create(category_name=get_category)
+        assignment_instance = Assignment.objects.create(**validated_data, category=category_instance)
         return assignment_instance
 
 

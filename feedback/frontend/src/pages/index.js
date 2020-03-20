@@ -7,7 +7,7 @@ const Home = () => (
   <Section>
     <Container>
       <Center padding="1em">
-        <h1>Welcome to Compass Learning</h1>
+        <h1>Welcome to Compass Task Manager</h1>
       </Center>
     </Container>
   </Section>

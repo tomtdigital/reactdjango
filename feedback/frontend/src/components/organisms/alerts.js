@@ -15,8 +15,8 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (prevError !== error) {
-      if (error.msg.subject)
-        alert.error(`Subject: ${error.msg.subject.join()}`);
+      if (error.msg.category)
+        alert.error(`Category: ${error.msg.category.join()}`);
       if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);

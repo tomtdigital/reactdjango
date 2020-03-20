@@ -14,10 +14,10 @@ export const AssignmentTable = ({
   }, [getAssignmentsRdx]);
 
   const tableData = {
-    columns: ['Subject', 'Title', 'Description'],
+    columns: ['Category', 'Title', 'Description'],
     rows: assignments.map(assignment => ({
       id: assignment.id,
-      values: [assignment.subject, assignment.title, assignment.description],
+      values: [assignment.category, assignment.title, assignment.description],
     })),
   };
   console.log(assignments);

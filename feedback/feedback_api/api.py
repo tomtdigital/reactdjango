@@ -1,13 +1,13 @@
-from feedback_api.models import Subject, Assignment
+from feedback_api.models import Category, Assignment
 from rest_framework import viewsets, permissions
-from .serializers import SubjectsSerializer, AssignmentsSerializer
+from .serializers import CategorySerializer, AssignmentsSerializer
 
-class SubjectsViewSet(viewsets.ModelViewSet):
-    queryset = Subject.objects.all()
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
     permission_classes = [
         permissions.AllowAny
         ]
-    serializer_class = SubjectsSerializer
+    serializer_class = CategorySerializer
 
 class AssignmentsViewSet(viewsets.ModelViewSet):
     queryset = Assignment.objects.all()

@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addSubject } from '../../actions/subjects';
+import { addCategory } from '../../actions/subjects';
 import Label from '../atoms/label';
 
-export const NewSubjectForm = ({ addSubjectRdx }) => {
-  const [subjectName, setSubjectName] = useState();
+export const NewCategoryForm = ({ addCategoryRdx }) => {
+  const [categoryName, setCategoryName] = useState();
 
   const resetForm = () => {
-    setSubjectName('');
+    setCategoryName('');
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    addSubjectRdx({ subject_name: subjectName });
+    addCategoryRdx({ category_name: categoryName });
     resetForm();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Label htmlFor="subject-name">
-        Subject Name
+      <Label htmlFor="category-name">
+        Category Name
         <input
-          id="subject-name"
-          name="subject-name"
-          onChange={e => setSubjectName(e.target.value)}
-          value={subjectName || ''}
+          id="category-name"
+          name="category-name"
+          onChange={e => setCategoryName(e.target.value)}
+          value={categoryName || ''}
         />
       </Label>
       <button type="submit">Submit</button>
@@ -33,10 +33,10 @@ export const NewSubjectForm = ({ addSubjectRdx }) => {
   );
 };
 
-NewSubjectForm.propTypes = {
-  addSubjectRdx: PropTypes.func.isRequired,
+NewCategoryForm.propTypes = {
+  addCategoryRdx: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
-  addSubjectRdx: addSubject,
-})(NewSubjectForm);
+  addCategoryRdx: addCategory,
+})(NewCategoryForm);
