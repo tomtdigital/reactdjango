@@ -15,8 +15,6 @@ class AssignmentsSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     category = serializers.CharField()
-    # category_id = serializers.ReadOnlyField()
-
 
     def create(self, validated_data):
         get_category = validated_data.pop('category')
