@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import assignments from './assignments';
+import tasks from './tasks';
 import categories from './categories';
 import errors from './errors';
 import messages from './messages';
 
 export default combineReducers({
   categories,
-  assignments,
+  tasks,
   errors,
   messages,
 });

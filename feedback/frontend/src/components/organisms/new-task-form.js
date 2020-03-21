@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { addAssignment } from '../../actions/assignments';
+import { addTask } from '../../actions/tasks';
 import { getCategories } from '../../actions/categories';
 import Label from '../atoms/label';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
 
-export const NewAssignmentForm = ({
-  categories,
-  addAssignmentRdx,
-  getCategoriesRdx,
-}) => {
+export const NewTaskForm = ({ categories, addTaskRdx, getCategoriesRdx }) => {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -28,8 +24,8 @@ export const NewAssignmentForm = ({
 
   const handleSubmit = event => {
     event.preventDefault();
-    const assignment = { category, title, description };
-    addAssignmentRdx(assignment);
+    const task = { category, title, description };
+    addTaskRdx(task);
     resetForm();
   };
 
@@ -82,16 +78,16 @@ export const NewAssignmentForm = ({
       ) : (
         <p>
           You must first <Link to="/categories">create a category</Link> before
-          adding an assignment
+          adding an task
         </p>
       )}
     </>
   );
 };
 
-NewAssignmentForm.propTypes = {
+NewTaskForm.propTypes = {
   categories: PropTypes.array.isRequired,
-  addAssignmentRdx: PropTypes.func.isRequired,
+  addTaskRdx: PropTypes.func.isRequired,
   getCategoriesRdx: PropTypes.func.isRequired,
 };
 
@@ -100,6 +96,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  addAssignmentRdx: addAssignment,
+  addTaskRdx: addTask,
   getCategoriesRdx: getCategories,
-})(NewAssignmentForm);
+})(NewTaskForm);

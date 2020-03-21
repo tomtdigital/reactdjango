@@ -6,8 +6,8 @@ class Category(models.Model):
     def __str__(self):
         return "%s" % self.category_name
 
-class Assignment(models.Model):
-    category = models.ForeignKey(Category, related_name='assignments', on_delete=models.CASCADE)
+class Task(models.Model):
+    category = models.ForeignKey(Category, related_name='tasks', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)        
 

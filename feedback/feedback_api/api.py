@@ -1,6 +1,6 @@
-from feedback_api.models import Category, Assignment
+from feedback_api.models import Category, Task
 from rest_framework import viewsets, permissions
-from .serializers import CategorySerializer, AssignmentsSerializer
+from .serializers import CategorySerializer, TaskSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -9,9 +9,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
         ]
     serializer_class = CategorySerializer
 
-class AssignmentsViewSet(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all()
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
     permission_classes = [
         permissions.AllowAny
         ]
-    serializer_class = AssignmentsSerializer
+    serializer_class = TaskSerializer

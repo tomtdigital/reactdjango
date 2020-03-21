@@ -34,8 +34,7 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (message !== prevMessage) {
-      if (message && message.assignmentDeleted)
-        alert.success(message.assignmentDeleted);
+      if (message && message.taskDeleted) alert.success(message.taskDeleted);
     }
   });
 

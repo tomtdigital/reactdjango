@@ -1,6 +1,6 @@
-export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
-export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
-export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
+export const GET_TASKS = 'GET_TASKS';
+export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';

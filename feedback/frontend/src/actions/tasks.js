@@ -1,46 +1,41 @@
 import axios from 'axios';
-import {
-  GET_ASSIGNMENTS,
-  DELETE_ASSIGNMENT,
-  ADD_ASSIGNMENT,
-  GET_ERRORS,
-} from './types';
+import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_ERRORS } from './types';
 import { createMessage } from './messages';
 
-// GET ASSIGNMENTS
-export const getAssignments = () => dispatch => {
+// GET TASKS
+export const getTasks = () => dispatch => {
   axios
-    .get('/api/assignments/')
+    .get('/api/tasks/')
     .then(res => {
       dispatch({
-        type: GET_ASSIGNMENTS,
+        type: GET_TASKS,
         payload: res.data,
       });
     })
     .catch(err => console.log(err));
 };
 
-// DELETE ASSIGNMENTS
-export const deleteAssignment = id => dispatch => {
+// DELETE TASKS
+export const deleteTask = id => dispatch => {
   axios
-    .delete(`/api/assignments/${id}/`)
+    .delete(`/api/tasks/${id}/`)
     .then(() => {
-      dispatch(createMessage({ assignmentDeleted: 'Assignment deleted' }));
+      dispatch(createMessage({ taskDeleted: 'Task deleted' }));
       dispatch({
-        type: DELETE_ASSIGNMENT,
+        type: DELETE_TASK,
         payload: id,
       });
     })
     .catch(err => console.log(err));
 };
 
-// ADD ASSIGNMENT
-export const addAssignment = assignment => dispatch => {
+// ADD TASK
+export const addTask = task => dispatch => {
   axios
-    .post(`/api/assignments/`, assignment)
+    .post(`/api/tasks/`, task)
     .then(res => {
       dispatch({
-        type: ADD_ASSIGNMENT,
+        type: ADD_TASK,
         payload: res.data,
       });
     })

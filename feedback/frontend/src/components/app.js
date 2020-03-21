@@ -8,7 +8,7 @@ import Alerts from './organisms/alerts';
 import store from '../store';
 import HomePage from '../pages';
 import CategoryPage from '../pages/categories/index';
-import AssignmentsPage from '../pages/assignments/index';
+import TaskPage from '../pages/tasks/index';
 import HeaderNav from './organisms/header-nav';
 import '../styles/styles.css';
 
@@ -29,8 +29,8 @@ const App = () => (
           <Route path="/categories">
             <CategoryPage />
           </Route>
-          <Route path="/assignments">
-            <AssignmentsPage />
+          <Route path="/tasks">
+            <TaskPage />
           </Route>
         </Switch>
       </HashRouter>
