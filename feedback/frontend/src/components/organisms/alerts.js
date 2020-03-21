@@ -20,6 +20,15 @@ const Alerts = ({ error, message }) => {
       if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
+      if (error.msg.non_field_errors) {
+        error.msg.non_field_errors.forEach(error => {
+          if (error.includes('make a unique set')) {
+            alert.error(error.replace('make a unique set', 'not be the same'));
+          } else {
+            alert.error(error);
+          }
+        });
+      }
     }
   });
 
