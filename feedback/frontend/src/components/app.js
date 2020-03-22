@@ -12,6 +12,7 @@ import AllTasksPage from '../pages/tasks/all/index';
 import HeaderNav from './organisms/header-nav';
 import '../styles/styles.css';
 import ViewTaskPage from '../pages/tasks/view-task';
+import EditTaskPage from '../pages/tasks/edit-task';
 
 const App = () => (
   <Provider store={store}>
@@ -37,7 +38,7 @@ const App = () => (
             <ViewTaskPage />
           </Route>
           <Route path="/tasks/edit-task">
-            <p>Edit task page</p>
+            <EditTaskPage />
           </Route>
         </Switch>
       </HashRouter>

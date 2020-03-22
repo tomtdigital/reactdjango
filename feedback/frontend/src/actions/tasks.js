@@ -4,6 +4,7 @@ import {
   GET_TASK,
   DELETE_TASK,
   ADD_TASK,
+  EDIT_TASK,
   GET_ERRORS,
 } from './types';
 import { createMessage } from './messages';
@@ -32,6 +33,28 @@ export const getTask = id => dispatch => {
       });
     })
     .catch(err => console.log(err));
+};
+
+// EDIT TASK
+export const editTask = (task, id) => dispatch => {
+  axios
+    .put(`/api/tasks/${id}/`, task)
+    .then(res => {
+      dispatch({
+        type: EDIT_TASK,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status,
+      };
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors,
+      });
+    });
 };
 
 // DELETE TASKS

@@ -1,32 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { addTask } from '../../actions/tasks';
+import { Link, useHistory } from 'react-router-dom';
+import { editTask, getTask } from '../../actions/tasks';
 import { getCategories } from '../../actions/categories';
 import Label from '../atoms/label';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
+import { NewCategoryForm } from './new-category-form';
 
-export const NewTaskForm = ({ categories, addTaskRdx, getCategoriesRdx }) => {
+export const EditTaskForm = ({
+  task,
+  categories,
+  getTaskRdx,
+  editTaskRdx,
+  getCategoriesRdx,
+}) => {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [newCategory, setNewCategory] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    const taskId = window.location.href.split('edit-task/')[1];
+    getTaskRdx(taskId);
+  }, [getTaskRdx]);
 
   useEffect(() => {
     getCategoriesRdx();
   }, [getCategoriesRdx]);
 
-  const resetForm = () => {
-    setCategory('');
-    setTitle('');
-    setDescription('');
-  };
+  useEffect(() => {
+    if (task) {
+      setCategory(task.category);
+      setTitle(task.title);
+      setDescription(task.description);
+    }
+  }, [task]);
 
   const handleSubmit = event => {
     event.preventDefault();
-    const task = { category, title, description };
-    addTaskRdx(task);
-    resetForm();
+    const taskUpdate = { category, title, description };
+    editTaskRdx(taskUpdate, task.id);
+    history.push(`/tasks/view-task/${task.id}`);
   };
 
   const sortObjectArray = useSortObjectArray;
@@ -35,24 +51,35 @@ export const NewTaskForm = ({ categories, addTaskRdx, getCategoriesRdx }) => {
 
   return (
     <>
-      {categories && categories.length > 0 ? (
+      {task && categories && categories.length > 0 ? (
         <form onSubmit={handleSubmit}>
           <Label htmlFor="category">
             Category
-            <select
-              id="category"
-              name="category"
-              onChange={e => setCategory(e.target.value)}
-              value={category || ''}
-            >
-              <option>---</option>
-              {sortedCategories.map((subj, index) => (
-                <option key={index} value={subj.category_name}>
-                  {subj.category_name}
-                </option>
-              ))}
-            </select>
+            {newCategory ? (
+              <input
+                id="category"
+                name="category"
+                onChange={e => setCategory(e.target.value)}
+                value={category || ''}
+              />
+            ) : (
+              <select
+                id="category"
+                name="category"
+                onChange={e => setCategory(e.target.value)}
+                value={category || ''}
+              >
+                {sortedCategories.map((subj, index) => (
+                  <option key={index} value={subj.category_name}>
+                    {subj.category_name}
+                  </option>
+                ))}
+              </select>
+            )}
           </Label>
+          <button type="button" onClick={() => setNewCategory(!newCategory)}>
+            {newCategory ? 'Use existing' : 'Add new category'}
+          </button>
           <Label htmlFor="title">
             Title
             <input
@@ -71,31 +98,32 @@ export const NewTaskForm = ({ categories, addTaskRdx, getCategoriesRdx }) => {
               value={description || ''}
             />
           </Label>
-          {/* {category.length > 0 && title.length > 0 && description.length > 0 && ( */}
           <button type="submit">Submit</button>
-          {/* )} */}
         </form>
       ) : (
         <p>
-          You must first <Link to="/categories">create a category</Link> before
-          adding an task
+          Cannot load task. <Link to="/tasks/all">View valid tasks</Link>
         </p>
       )}
     </>
   );
 };
 
-NewTaskForm.propTypes = {
+EditTaskForm.propTypes = {
+  task: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
-  addTaskRdx: PropTypes.func.isRequired,
+  getTaskRdx: PropTypes.func.isRequired,
+  editTaskRdx: PropTypes.func.isRequired,
   getCategoriesRdx: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
+  task: state.tasks.task,
 });
 
 export default connect(mapStateToProps, {
-  addTaskRdx: addTask,
+  getTaskRdx: getTask,
   getCategoriesRdx: getCategories,
-})(NewTaskForm);
+  editTaskRdx: editTask,
+})(EditTaskForm);

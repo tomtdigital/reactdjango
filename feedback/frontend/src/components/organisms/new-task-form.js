@@ -71,9 +71,7 @@ export const NewTaskForm = ({ categories, addTaskRdx, getCategoriesRdx }) => {
               value={description || ''}
             />
           </Label>
-          {/* {category.length > 0 && title.length > 0 && description.length > 0 && ( */}
           <button type="submit">Submit</button>
-          {/* )} */}
         </form>
       ) : (
         <p>

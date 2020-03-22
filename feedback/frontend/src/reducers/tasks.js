@@ -3,6 +3,7 @@ import {
   DELETE_TASK,
   ADD_TASK,
   GET_TASK,
+  EDIT_TASK,
 } from '../actions/types.js';
 
 const initialState = {
@@ -27,6 +28,11 @@ export default function(state = initialState, action) {
         tasks: state.tasks.filter(task => task.id !== action.payload),
       };
     case ADD_TASK:
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload],
+      };
+    case EDIT_TASK:
       return {
         ...state,
         tasks: [...state.tasks, action.payload],

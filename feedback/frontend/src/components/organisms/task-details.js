@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getTask } from '../../actions/tasks';
 
 export const TaskDetails = ({ task, getTaskRdx }) => {
@@ -15,6 +16,9 @@ export const TaskDetails = ({ task, getTaskRdx }) => {
           <p>Category: {task.category}</p>
           <p>Title: {task.title}</p>
           <p>Description: {task.description}</p>
+          <Link to={`/tasks/edit-task/${task.id}`}>Edit</Link>
+          <br />
+          <Link to="/tasks/all">Back to all tasks</Link>
         </>
       ) : (
         <>
