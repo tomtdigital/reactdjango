@@ -4,6 +4,7 @@ from .serializers import CategorySerializer, TaskSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
+    filterset_fields = ['category_name', 'tasks']
     permission_classes = [
         permissions.AllowAny
         ]
