@@ -1,14 +1,33 @@
 import axios from 'axios';
-import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_ERRORS } from './types';
+import {
+  GET_ALL_TASKS,
+  GET_TASK,
+  DELETE_TASK,
+  ADD_TASK,
+  GET_ERRORS,
+} from './types';
 import { createMessage } from './messages';
 
 // GET TASKS
-export const getTasks = () => dispatch => {
+export const getAllTasks = () => dispatch => {
   axios
     .get('/api/tasks/')
     .then(res => {
       dispatch({
-        type: GET_TASKS,
+        type: GET_ALL_TASKS,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+// GET INDIVIDUAL TASK
+export const getTask = id => dispatch => {
+  axios
+    .get(`/api/tasks/${id}/`)
+    .then(res => {
+      dispatch({
+        type: GET_TASK,
         payload: res.data,
       });
     })

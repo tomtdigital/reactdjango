@@ -12,6 +12,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
+    filterset_fields = {
+        'category':['exact'], 
+        'title':['exact'], 
+        'description':['exact','contains']}
     permission_classes = [
         permissions.AllowAny
         ]

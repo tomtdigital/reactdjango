@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getTasks, deleteTask } from '../../actions/tasks';
+import { getAllTasks, deleteTask } from '../../actions/tasks';
 import DataTable from '../molecules/data-table';
 
-export const TaskTable = ({ tasks, getTasksRdx, deleteTaskRdx }) => {
+export const TaskTable = ({ tasks, getAllTasksRdx, deleteTaskRdx }) => {
   useEffect(() => {
-    getTasksRdx();
-  }, [getTasksRdx]);
+    getAllTasksRdx();
+  }, [getAllTasksRdx]);
 
   const tableData = {
     columns: ['Category', 'Title', 'Description'],
@@ -16,13 +16,16 @@ export const TaskTable = ({ tasks, getTasksRdx, deleteTaskRdx }) => {
       values: [task.category, task.title, task.description],
     })),
   };
-  console.log(tasks);
-  tasks.forEach(task => console.log(task));
 
   return (
     <>
       {tasks.length > 0 ? (
-        <DataTable data={tableData} enableDeletion onDeletion={deleteTaskRdx} />
+        <DataTable
+          data={tableData}
+          linkToItem
+          enableDeletion
+          onDeletion={deleteTaskRdx}
+        />
       ) : (
         <p>Please fill out the form to add an task >>></p>
       )}
@@ -32,7 +35,7 @@ export const TaskTable = ({ tasks, getTasksRdx, deleteTaskRdx }) => {
 
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
-  getTasksRdx: PropTypes.func.isRequired,
+  getAllTasksRdx: PropTypes.func.isRequired,
   deleteTaskRdx: PropTypes.func.isRequired,
 };
 
@@ -41,6 +44,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  getTasksRdx: getTasks,
+  getAllTasksRdx: getAllTasks,
   deleteTaskRdx: deleteTask,
 })(TaskTable);

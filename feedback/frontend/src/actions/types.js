@@ -1,4 +1,5 @@
-export const GET_TASKS = 'GET_TASKS';
+export const GET_ALL_TASKS = 'GET_ALL_TASKS';
+export const GET_TASK = 'GET_TASK';
 export const ADD_TASK = 'ADD_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const GET_CATEGORIES = 'GET_CATEGORIES';

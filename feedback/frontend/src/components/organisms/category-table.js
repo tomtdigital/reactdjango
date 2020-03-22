@@ -13,8 +13,6 @@ export const CategoriesTable = ({
   useEffect(() => {
     getCategoriesRdx();
   }, [getCategoriesRdx]);
-  console.log(categories);
-  categories.forEach(category => console.log(category));
   const sortObjectArray = useSortObjectArray;
   const sortedCategories =
     categories && categories.sort(sortObjectArray('category_name'));

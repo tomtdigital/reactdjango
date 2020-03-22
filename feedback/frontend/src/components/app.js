@@ -8,9 +8,10 @@ import Alerts from './organisms/alerts';
 import store from '../store';
 import HomePage from '../pages';
 import CategoryPage from '../pages/categories/index';
-import TaskPage from '../pages/tasks/index';
+import AllTasksPage from '../pages/tasks/all/index';
 import HeaderNav from './organisms/header-nav';
 import '../styles/styles.css';
+import ViewTaskPage from '../pages/tasks/view-task';
 
 const App = () => (
   <Provider store={store}>
@@ -29,8 +30,14 @@ const App = () => (
           <Route path="/categories">
             <CategoryPage />
           </Route>
-          <Route path="/tasks">
-            <TaskPage />
+          <Route path="/tasks/all">
+            <AllTasksPage />
+          </Route>
+          <Route path="/tasks/view-task">
+            <ViewTaskPage />
+          </Route>
+          <Route path="/tasks/edit-task">
+            <p>Edit task page</p>
           </Route>
         </Switch>
       </HashRouter>
