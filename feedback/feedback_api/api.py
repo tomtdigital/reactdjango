@@ -11,12 +11,18 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
+    # queryset = Task.objects.all()
     filterset_fields = {
         'category':['exact'], 
         'title':['exact'], 
         'description':['exact','contains']}
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
         ]
     serializer_class = TaskSerializer
+    
+    def get_queryset(self):
+        return self.user.tasks.all
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

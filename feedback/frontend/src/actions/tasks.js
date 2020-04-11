@@ -5,9 +5,8 @@ import {
   DELETE_TASK,
   ADD_TASK,
   EDIT_TASK,
-  GET_ERRORS,
 } from './types';
-import { createMessage } from './messages';
+import { createMessage, returnErrors } from './messages';
 
 // GET TASKS
 export const getAllTasks = () => dispatch => {
@@ -19,7 +18,9 @@ export const getAllTasks = () => dispatch => {
         payload: res.data,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // GET INDIVIDUAL TASK
@@ -32,7 +33,9 @@ export const getTask = id => dispatch => {
         payload: res.data,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // EDIT TASK
@@ -46,14 +49,7 @@ export const editTask = (task, id) => dispatch => {
       });
     })
     .catch(err => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 
@@ -68,7 +64,9 @@ export const deleteTask = id => dispatch => {
         payload: id,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // ADD TASK
@@ -82,13 +80,6 @@ export const addTask = task => dispatch => {
       });
     })
     .catch(err => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
