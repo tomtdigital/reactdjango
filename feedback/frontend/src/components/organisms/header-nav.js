@@ -1,20 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import linkData from '../../data/navigation/header-nav.json';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import links from '../../data/navigation/header-nav.json';
+import linksSignedIn from '../../data/navigation/header-nav-auth.json';
 import NavLinks from '../molecules/nav-links.js';
 import FlexWrapper from '../atoms/flex-wrapper.js';
+import Container from '../atoms/container';
+import { logout } from '../../actions/auth';
 
-const HomeLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
+const HeaderNav = ({ isAuthenticated, logoutRdx }) => {
+  const linkData = isAuthenticated ? linksSignedIn : links;
+  return (
+    <nav>
+      <Container padding="1em">
+        <FlexWrapper justify="space-between">
+          <NavLinks data={linkData} />
+          {isAuthenticated && (
+            <button type="button" onClick={logoutRdx}>
+              Logout
+            </button>
+          )}
+        </FlexWrapper>
+      </Container>
+    </nav>
+  );
+};
 
-const HeaderNav = () => (
-  <FlexWrapper justify="space-between">
-    <HomeLink to="/">Compass</HomeLink>
-    <NavLinks data={linkData} />
-  </FlexWrapper>
-);
+HeaderNav.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  logoutRdx: PropTypes.func.isRequired,
+};
 
-export default HeaderNav;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { logoutRdx: logout })(HeaderNav);

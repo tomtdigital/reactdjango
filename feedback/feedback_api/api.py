@@ -11,7 +11,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
 
 class TaskViewSet(viewsets.ModelViewSet):
-    # queryset = Task.objects.all()
     filterset_fields = {
         'category':['exact'], 
         'title':['exact'], 

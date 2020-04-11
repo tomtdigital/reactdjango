@@ -1,10 +1,10 @@
 [
   {
-    "text": "Categories",
-    "path": "/categories"
+    "text": "Register",
+    "path": "/register"
   },
   {
-    "text": "All Tasks",
-    "path": "/tasks/all"
+    "text": "Login",
+    "path": "/login"
   }
 ]

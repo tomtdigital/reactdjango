@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Compass",
+    "path": "/"
+  },
+  {
+    "text": "Categories",
+    "path": "/categories"
+  },
+  {
+    "text": "All Tasks",
+    "path": "/tasks/all"
+  }
+]
