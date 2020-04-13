@@ -5,7 +5,7 @@ from knox.auth import TokenAuthentication
 
 class CategoryViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
-    filterset_fields = ['category_name', 'tasks', 'owner']
+    filterset_fields = ['category_name', 'tasks']
     permission_classes = [
         permissions.IsAuthenticated
         ]
@@ -27,6 +27,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
         ]
     serializer_class = TaskSerializer
+    
     def get_queryset(self):
         return self.request.user.tasks.all()
     
