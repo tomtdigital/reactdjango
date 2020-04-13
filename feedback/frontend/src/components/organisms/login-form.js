@@ -9,15 +9,9 @@ export const LoginForm = ({ loginRdx, isAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const resetForm = () => {
-    setUsername('');
-    setPassword('');
-  };
-
   const handleSubmit = event => {
     event.preventDefault();
     loginRdx(username, password);
-    resetForm();
   };
 
   return (

@@ -20,6 +20,11 @@ const Alerts = ({ error, message }) => {
       if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
       if (error.msg.description)
         alert.error(`Description: ${error.msg.description.join()}`);
+      if (error.msg.username)
+        alert.error(`Username: ${error.msg.username.join()}`);
+      if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
+      if (error.msg.password)
+        alert.error(`Password: ${error.msg.password.join()}`);
       if (error.msg.non_field_errors) {
         error.msg.non_field_errors.forEach(error => {
           if (error.includes('make a unique set')) {
@@ -34,6 +39,8 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (message !== prevMessage) {
+      if (message && message.passwordNoMatch)
+        alert.error(message.passwordNoMatch);
       if (message && message.taskDeleted) alert.success(message.taskDeleted);
     }
   });

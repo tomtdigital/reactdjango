@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Label from '../atoms/label';
+import { register } from '../../actions/auth';
+import { createMessage } from '../../actions/messages';
 
-export const RegistrationForm = () => {
+export const RegistrationForm = ({
+  isAuthenticated,
+  registerRdx,
+  createMessageRdx,
+}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,13 +27,18 @@ export const RegistrationForm = () => {
     event.preventDefault();
     if (password === confirmPassword) {
       const newUser = { username, email, password };
-      // Do something
+      registerRdx(newUser);
       resetForm();
+    } else {
+      createMessageRdx({
+        passwordNoMatch: 'Your password fields must match',
+      });
     }
   };
 
   return (
     <>
+      {isAuthenticated && <Redirect to="/" />}
       <form onSubmit={handleSubmit}>
         <Label htmlFor="username">
           Username
@@ -76,15 +87,17 @@ export const RegistrationForm = () => {
   );
 };
 
-// RegistrationForm.propTypes = {
+RegistrationForm.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  registerRdx: PropTypes.func.isRequired,
+  createMessageRdx: PropTypes.func.isRequired,
+};
 
-// };
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-// const mapStateToProps = state => ({
-
-// });
-
-// export default connect(mapStateToProps, {
-// addTaskRdx: addTask,
-// getCategoriesRdx: getCategories,
-// })(RegistrationForm);
+export default connect(mapStateToProps, {
+  registerRdx: register,
+  createMessageRdx: createMessage,
+})(RegistrationForm);
