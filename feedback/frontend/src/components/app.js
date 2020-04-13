@@ -42,18 +42,18 @@ const App = () => {
             <PrivateRoute exact path="/">
               <HomePage />
             </PrivateRoute>
-            <Route path="/categories">
+            <PrivateRoute path="/categories">
               <CategoryPage />
-            </Route>
-            <Route path="/tasks/all">
+            </PrivateRoute>
+            <PrivateRoute path="/tasks/all">
               <AllTasksPage />
-            </Route>
-            <Route path="/tasks/view-task">
+            </PrivateRoute>
+            <PrivateRoute path="/tasks/view-task">
               <ViewTaskPage />
-            </Route>
-            <Route path="/tasks/edit-task">
+            </PrivateRoute>
+            <PrivateRoute path="/tasks/edit-task">
               <EditTaskPage />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </AlertProvider>

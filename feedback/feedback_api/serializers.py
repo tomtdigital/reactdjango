@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Category
-        fields = ['id','category_name', 'tasks']
+        fields = ['id','category_name', 'tasks', 'owner']
 
 class TaskSerializer(serializers.ModelSerializer):
     

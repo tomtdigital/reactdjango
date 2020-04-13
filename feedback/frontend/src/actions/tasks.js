@@ -7,11 +7,13 @@ import {
   EDIT_TASK,
 } from './types';
 import { createMessage, returnErrors } from './messages';
+import { tokenConfig } from './auth';
 
 // GET TASKS
-export const getAllTasks = () => dispatch => {
+export const getAllTasks = () => (dispatch, getState) => {
+  console.log(tokenConfig(getState));
   axios
-    .get('/api/tasks/')
+    .get('/api/tasks/', tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_ALL_TASKS,
@@ -24,9 +26,9 @@ export const getAllTasks = () => dispatch => {
 };
 
 // GET INDIVIDUAL TASK
-export const getTask = id => dispatch => {
+export const getTask = id => (dispatch, getState) => {
   axios
-    .get(`/api/tasks/${id}/`)
+    .get(`/api/tasks/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_TASK,
@@ -39,9 +41,9 @@ export const getTask = id => dispatch => {
 };
 
 // EDIT TASK
-export const editTask = (task, id) => dispatch => {
+export const editTask = (task, id) => (dispatch, getState) => {
   axios
-    .put(`/api/tasks/${id}/`, task)
+    .put(`/api/tasks/${id}/`, task, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: EDIT_TASK,
@@ -54,9 +56,9 @@ export const editTask = (task, id) => dispatch => {
 };
 
 // DELETE TASKS
-export const deleteTask = id => dispatch => {
+export const deleteTask = id => (dispatch, getState) => {
   axios
-    .delete(`/api/tasks/${id}/`)
+    .delete(`/api/tasks/${id}/`, tokenConfig(getState))
     .then(() => {
       dispatch(createMessage({ taskDeleted: 'Task deleted' }));
       dispatch({
@@ -70,9 +72,9 @@ export const deleteTask = id => dispatch => {
 };
 
 // ADD TASK
-export const addTask = task => dispatch => {
+export const addTask = task => (dispatch, getState) => {
   axios
-    .post(`/api/tasks/`, task)
+    .post(`/api/tasks/`, task, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: ADD_TASK,
