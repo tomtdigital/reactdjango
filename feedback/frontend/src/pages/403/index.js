@@ -5,7 +5,7 @@ import Container from '../../components/atoms/container';
 
 const NotAuthorised = () => {
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') && typeof window !== 'undefined') {
       window.location.href = '#/login';
     }
   });
