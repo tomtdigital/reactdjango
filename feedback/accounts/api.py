@@ -15,6 +15,14 @@ class UserAPIView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+    
+    def put(self, request, format=None):
+        user = self.request.user
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterAPIView(generics.GenericAPIView):
