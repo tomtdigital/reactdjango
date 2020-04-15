@@ -9,7 +9,7 @@ const Profile = () => (
   <Section>
     <Container>
       <Center padding="1em">
-        <h2>My profile</h2>
+        <h2>My Profile</h2>
       </Center>
       <UserDetailsRdx />
       <ProfileDetailsRdx />

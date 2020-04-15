@@ -11,11 +11,18 @@ const Home = () => (
       </Center>
       <h3>To do..</h3>
       <ul>
-        <li>Change password</li>
-        <li>Add superuser</li>
-        <li>Refactor front end</li>
-        <li>Refactor API</li>
+        <li>Refactor front end- quicker way to do forms/redux stuff?</li>
         <li>Add next model</li>
+      </ul>
+      <h3>Post P.O.C</h3>
+      <ul>
+        <li>DRF course</li>
+        <li>Refactor API</li>
+        <li>Change password</li>
+        <li>Superuser permissions</li>
+        <li>Friend requests</li>
+        <li>View friends tasks</li>
+        <li>Adapt friends tasks</li>
       </ul>
     </Container>
   </Section>
