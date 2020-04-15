@@ -11,7 +11,6 @@ import { tokenConfig } from './auth';
 
 // GET TASKS
 export const getAllTasks = () => (dispatch, getState) => {
-  console.log(tokenConfig(getState));
   axios
     .get('/api/tasks/', tokenConfig(getState))
     .then(res => {

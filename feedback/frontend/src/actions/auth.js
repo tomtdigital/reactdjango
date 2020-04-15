@@ -10,6 +10,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  EDIT_USER_DETAILS,
 } from './types';
 
 // Setup config with token - helper function
@@ -116,6 +117,21 @@ export const logout = () => (dispatch, getState) => {
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS,
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// EDIT DETAILS
+export const editUserDetails = user => (dispatch, getState) => {
+  axios
+    .put(`/api/auth/user`, user, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: EDIT_USER_DETAILS,
+        payload: res.data,
       });
     })
     .catch(err => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export const UserDetails = ({ user }) => (
   <>
@@ -15,6 +16,7 @@ export const UserDetails = ({ user }) => (
         <p>Could not identify user</p>
       </div>
     )}
+    <Link to="/user/edit-details">Edit</Link>
   </>
 );
 
