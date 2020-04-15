@@ -6,7 +6,6 @@ import { editTask, getTask } from '../../actions/tasks';
 import { getCategories } from '../../actions/categories';
 import Label from '../atoms/label';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
-import { NewCategoryForm } from './new-category-form';
 
 export const EditTaskForm = ({
   task,

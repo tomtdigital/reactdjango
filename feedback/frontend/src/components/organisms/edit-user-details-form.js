@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { editUserDetails } from '../../actions/auth';
 import Label from '../atoms/label';
 
 export const EditUserDetailsForm = ({ user, editUserDetailsRdx }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const history = useHistory();
 
   useEffect(() => {
     if (user) {
@@ -21,7 +20,6 @@ export const EditUserDetailsForm = ({ user, editUserDetailsRdx }) => {
     event.preventDefault();
     const userUpdate = { username, email };
     editUserDetailsRdx(userUpdate);
-    history.push(`/`);
   };
 
   return (
@@ -39,7 +37,7 @@ export const EditUserDetailsForm = ({ user, editUserDetailsRdx }) => {
           </Label>
           <Label htmlFor="email">
             Email
-            <textarea
+            <input
               id="email"
               name="email"
               onChange={e => setEmail(e.target.value)}
@@ -66,6 +64,10 @@ const mapStateToProps = state => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps, {
-  editUserDetailsRdx: editUserDetails,
-})(EditUserDetailsForm);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  editUserDetailsRdx: user => dispatch(editUserDetails(user, ownProps)),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(EditUserDetailsForm)
+);

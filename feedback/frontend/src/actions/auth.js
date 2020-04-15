@@ -130,7 +130,7 @@ export const logout = () => (dispatch, getState) => {
 };
 
 // EDIT DETAILS
-export const editUserDetails = user => (dispatch, getState) => {
+export const editUserDetails = (user, ownProps) => (dispatch, getState) => {
   axios
     .put(`/api/auth/user`, user, tokenConfig(getState))
     .then(res => {
@@ -138,6 +138,9 @@ export const editUserDetails = user => (dispatch, getState) => {
         type: EDIT_USER_DETAILS,
         payload: res.data,
       });
+    })
+    .then(res => {
+      ownProps.history.push('/');
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

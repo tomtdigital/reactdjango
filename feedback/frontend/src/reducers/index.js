@@ -4,6 +4,7 @@ import tasks from './tasks';
 import categories from './categories';
 import errors from './errors';
 import messages from './messages';
+import profile from './profile';
 
 export default combineReducers({
   auth,
@@ -11,4 +12,5 @@ export default combineReducers({
   tasks,
   errors,
   messages,
+  profile,
 });

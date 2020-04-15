@@ -16,7 +16,7 @@ export const UserDetails = ({ user }) => (
         <p>Could not identify user</p>
       </div>
     )}
-    <Link to="/user/edit-details">Edit</Link>
+    <Link to="/user/edit-user">Edit</Link>
   </>
 );
 

@@ -1,5 +1,5 @@
 from feedback_api.models import Category, Task
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from .serializers import CategorySerializer, TaskSerializer, ProfileSerializer
 from knox.auth import TokenAuthentication
 
