@@ -4,11 +4,15 @@
     "path": "/"
   },
   {
-    "text": "Categories",
+    "text": "My Profile",
+    "path": "/profile"
+  },
+  {
+    "text": "My Categories",
     "path": "/categories"
   },
   {
-    "text": "All Tasks",
+    "text": "My Tasks",
     "path": "/tasks/all"
   }
 ]

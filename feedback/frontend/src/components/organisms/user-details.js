@@ -7,6 +7,7 @@ export const UserDetails = ({ user }) => (
   <>
     {user ? (
       <div>
+        <h3>Account Information</h3>
         <p>Id: {user.id}</p>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>

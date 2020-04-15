@@ -140,7 +140,7 @@ export const editUserDetails = (user, ownProps) => (dispatch, getState) => {
       });
     })
     .then(res => {
-      ownProps.history.push('/');
+      ownProps.history.push('/profile');
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

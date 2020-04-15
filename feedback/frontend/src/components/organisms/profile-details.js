@@ -11,17 +11,18 @@ export const ProfileDetails = ({ profile, getProfileRdx }) => {
   return (
     <>
       {profile ? (
-        <>
+        <div>
+          <h3>Personal Information</h3>
           <p>First name: {profile.first_name}</p>
           <p>Last name: {profile.last_name}</p>
           <p>Age: {profile.age}</p>
           <p>About me: {profile.about_me}</p>
           <Link to="/profile/edit-profile">Edit</Link>
-        </>
+        </div>
       ) : (
-        <>
+        <div>
           <p>Could not find profile</p>
-        </>
+        </div>
       )}
     </>
   );

@@ -16,6 +16,7 @@ import EditTaskPage from '../pages/tasks/edit-task';
 import RegisterPage from '../pages/register';
 import LoginPage from '../pages/login';
 import EditUserDetailsPage from '../pages/user/edit-user-details';
+import ProfilePage from '../pages/profile';
 import EditProfilePage from '../pages/profile/edit-profile';
 import PrivateRoute from './atoms/private-route';
 import { loadUser } from '../actions/auth';
@@ -58,6 +59,9 @@ const App = () => {
             </PrivateRoute>
             <PrivateRoute path="/user/edit-user">
               <EditUserDetailsPage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/profile">
+              <ProfilePage />
             </PrivateRoute>
             <PrivateRoute path="/profile/edit-profile">
               <EditProfilePage />
