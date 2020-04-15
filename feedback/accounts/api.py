@@ -1,12 +1,16 @@
-from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics, status, viewsets
+from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
+from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from knox.models import AuthToken
 from knox.auth import TokenAuthentication
 
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, AllUsersSerializer
 
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = AllUsersSerializer
 
 class UserAPIView(generics.RetrieveAPIView):
     authentication_classes = (TokenAuthentication,)

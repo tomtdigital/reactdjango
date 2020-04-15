@@ -11,9 +11,10 @@ const Home = () => (
       </Center>
       <h3>To do..</h3>
       <ul>
+        <li>Change password</li>
+        <li>Add superuser</li>
         <li>Refactor front end</li>
         <li>Refactor API</li>
-        <li>Change password</li>
         <li>Add next model</li>
       </ul>
     </Container>
