@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-
+from feedback_api.serializers import ProfileSerializer
+from feedback_api.models import Profile
 from rest_framework import serializers
 
 User._meta.get_field('email')._unique = True
@@ -13,9 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(required=True)
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password', 'profile')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -23,6 +25,16 @@ class RegisterSerializer(serializers.ModelSerializer):
             validated_data['username'],
             validated_data['email'],
             validated_data['password']
+        )
+        
+        profile_data = validated_data.pop('profile')
+        # create profile
+        profile = Profile.objects.create(
+            first_name = profile_data['first_name'],
+            last_name = profile_data['last_name'],           
+            age = profile_data['age'],
+            about_me = profile_data['about_me'],
+            owner = user
         )
         return user
 

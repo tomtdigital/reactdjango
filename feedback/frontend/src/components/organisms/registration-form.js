@@ -16,6 +16,11 @@ export const RegistrationForm = ({
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [aboutMe, setAboutMe] = useState('');
+
   const resetForm = () => {
     setUsername('');
     setEmail('');
@@ -26,7 +31,13 @@ export const RegistrationForm = ({
   const handleSubmit = event => {
     event.preventDefault();
     if (password === confirmPassword) {
-      const newUser = { username, email, password };
+      const profile = {
+        first_name: firstName,
+        last_name: lastName,
+        age,
+        about_me: aboutMe,
+      };
+      const newUser = { username, email, password, profile };
       registerRdx(newUser);
       resetForm();
     } else {
@@ -76,6 +87,43 @@ export const RegistrationForm = ({
             name="confirmPassword"
             onChange={e => setConfirmPassword(e.target.value)}
             value={confirmPassword || ''}
+          />
+        </Label>
+        <Label htmlFor="firstName">
+          First Name
+          <input
+            id="firstName"
+            name="firstName"
+            onChange={e => setFirstName(e.target.value)}
+            value={firstName || ''}
+          />
+        </Label>
+        <Label htmlFor="lastName">
+          Last Name
+          <input
+            id="lastName"
+            name="lastName"
+            onChange={e => setLastName(e.target.value)}
+            value={lastName || ''}
+          />
+        </Label>
+        <Label htmlFor="age">
+          Age
+          <input
+            type="number"
+            id="age"
+            name="age"
+            onChange={e => setAge(e.target.value)}
+            value={age || ''}
+          />
+        </Label>
+        <Label htmlFor="aboutMe">
+          About Me
+          <textarea
+            id="aboutMe"
+            name="aboutMe"
+            onChange={e => setAboutMe(e.target.value)}
+            value={aboutMe || ''}
           />
         </Label>
         <button type="submit">Register</button>
