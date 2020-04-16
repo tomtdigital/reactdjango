@@ -19,6 +19,7 @@ export const EditTaskForm = ({
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [newCategory, setNewCategory] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -53,14 +54,24 @@ export const EditTaskForm = ({
     <>
       {task && categories && categories.length > 0 ? (
         <form onSubmit={handleSubmit}>
-          <Select label="Category" value={category} onChange={setCategory}>
-            {sortedCategories.map((cat, index) => (
-              <option key={index} value={cat.category_name}>
-                {cat.category_name}
-              </option>
-            ))}
-          </Select>
-
+          {newCategory ? (
+            <TextInput
+              label="Category"
+              value={category}
+              onChange={setCategory}
+            />
+          ) : (
+            <Select label="Category" value={category} onChange={setCategory}>
+              {sortedCategories.map((subj, index) => (
+                <option key={index} value={subj.category_name}>
+                  {subj.category_name}
+                </option>
+              ))}
+            </Select>
+          )}
+          <button type="button" onClick={() => setNewCategory(!newCategory)}>
+            {newCategory ? 'Use existing' : 'Add new category'}
+          </button>
           <TextInput label="Title" value={title} onChange={setTitle} />
           <TextArea
             label="Description"

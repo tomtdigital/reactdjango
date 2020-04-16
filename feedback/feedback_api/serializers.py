@@ -22,14 +22,16 @@ class TaskSerializer(serializers.ModelSerializer):
     category = serializers.CharField()
 
     def create(self, validated_data):
+        user =  self.context['request'].user
         get_category = validated_data.pop('category')
-        category_instance, created = Category.objects.get_or_create(category_name=get_category)
+        category_instance, created = Category.objects.get_or_create(category_name=get_category, owner=user)
         task_instance = Task.objects.create(**validated_data, category=category_instance)
         return task_instance
 
     def update(self, instance, validated_data):
+        user =  self.context['request'].user
         get_category = validated_data.pop('category')
-        category_instance, created = Category.objects.get_or_create(category_name=get_category)
+        category_instance, created = Category.objects.get_or_create(category_name=get_category, owner=user)
         instance.category = category_instance
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.description)
