@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { editProfile, getProfile } from '../../actions/profile';
-import Label from '../atoms/label';
+import TextInput from '../atoms/text-input';
+import TextArea from '../atoms/text-area';
 
 export const EditUserProfileForm = ({
   profile,
@@ -43,43 +44,18 @@ export const EditUserProfileForm = ({
     <>
       {profile ? (
         <form onSubmit={handleSubmit}>
-          <Label htmlFor="firstName">
-            First Name
-            <input
-              id="firstName"
-              name="firstName"
-              onChange={e => setFirstName(e.target.value)}
-              value={firstName || ''}
-            />
-          </Label>
-          <Label htmlFor="lastName">
-            Last Name
-            <input
-              id="lastName"
-              name="lastName"
-              onChange={e => setLastName(e.target.value)}
-              value={lastName || ''}
-            />
-          </Label>
-          <Label htmlFor="age">
-            Age
-            <input
-              type="number"
-              id="age"
-              name="age"
-              onChange={e => setAge(e.target.value)}
-              value={age || ''}
-            />
-          </Label>
-          <Label htmlFor="aboutMe">
-            About Me
-            <textarea
-              id="aboutMe"
-              name="aboutMe"
-              onChange={e => setAboutMe(e.target.value)}
-              value={aboutMe || ''}
-            />
-          </Label>
+          <TextInput
+            label="First Name"
+            value={firstName}
+            onChange={setFirstName}
+          />
+          <TextInput
+            label="Last Name"
+            value={lastName}
+            onChange={setLastName}
+          />
+          <TextInput label="Age" type="number" value={age} onChange={setAge} />
+          <TextArea label="About Me" value={aboutMe} onChange={setAboutMe} />
           <button type="submit">Submit</button>
         </form>
       ) : (

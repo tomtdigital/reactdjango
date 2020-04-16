@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { editTask, getTask } from '../../actions/tasks';
 import { getCategories } from '../../actions/categories';
-import Label from '../atoms/label';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
+import TextInput from '../atoms/text-input';
+import Select from '../atoms/select';
+import TextArea from '../atoms/text-area';
 
 export const EditTaskForm = ({
   task,
@@ -17,7 +19,6 @@ export const EditTaskForm = ({
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [newCategory, setNewCategory] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -52,51 +53,20 @@ export const EditTaskForm = ({
     <>
       {task && categories && categories.length > 0 ? (
         <form onSubmit={handleSubmit}>
-          <Label htmlFor="category">
-            Category
-            {newCategory ? (
-              <input
-                id="category"
-                name="category"
-                onChange={e => setCategory(e.target.value)}
-                value={category || ''}
-              />
-            ) : (
-              <select
-                id="category"
-                name="category"
-                onChange={e => setCategory(e.target.value)}
-                value={category || ''}
-              >
-                {sortedCategories.map((subj, index) => (
-                  <option key={index} value={subj.category_name}>
-                    {subj.category_name}
-                  </option>
-                ))}
-              </select>
-            )}
-          </Label>
-          <button type="button" onClick={() => setNewCategory(!newCategory)}>
-            {newCategory ? 'Use existing' : 'Add new category'}
-          </button>
-          <Label htmlFor="title">
-            Title
-            <input
-              id="title"
-              name="title"
-              onChange={e => setTitle(e.target.value)}
-              value={title || ''}
-            />
-          </Label>
-          <Label htmlFor="description">
-            Description
-            <textarea
-              id="description"
-              name="description"
-              onChange={e => setDescription(e.target.value)}
-              value={description || ''}
-            />
-          </Label>
+          <Select label="Category" value={category} onChange={setCategory}>
+            {sortedCategories.map((cat, index) => (
+              <option key={index} value={cat.category_name}>
+                {cat.category_name}
+              </option>
+            ))}
+          </Select>
+
+          <TextInput label="Title" value={title} onChange={setTitle} />
+          <TextArea
+            label="Description"
+            value={description}
+            onChange={setDescription}
+          />
           <button type="submit">Submit</button>
         </form>
       ) : (

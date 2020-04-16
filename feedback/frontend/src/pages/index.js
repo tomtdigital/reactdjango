@@ -11,7 +11,10 @@ const Home = () => (
       </Center>
       <h3>To do..</h3>
       <ul>
-        <li>Refactor front end- quicker way to do forms/redux stuff?</li>
+        <li>
+          Refactor front end- quicker way to do forms/redux stuff? (just
+          finished alerts)
+        </li>
         <li>Add next model</li>
       </ul>
       <h3>Post P.O.C</h3>
