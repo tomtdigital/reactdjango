@@ -7,6 +7,24 @@ const Alerts = ({ error, message }) => {
   const alert = useAlert();
   const [prevError, setPrevError] = useState();
   const [prevMessage, setPrevMessage] = useState();
+  const errorNames = [
+    'category',
+    'title',
+    'description',
+    'username',
+    'email',
+    'password',
+  ];
+
+  const messageData = {
+    taskDeleted: {
+      type: 'success',
+    },
+    passwordNoMatch: {
+      type: 'error',
+    },
+  };
+  const messageNames = Object.keys(messageData);
 
   useEffect(() => {
     setPrevError(error);
@@ -15,16 +33,11 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (prevError !== error) {
-      if (error.msg.category)
-        alert.error(`Category: ${error.msg.category.join()}`);
-      if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
-      if (error.msg.description)
-        alert.error(`Description: ${error.msg.description.join()}`);
-      if (error.msg.username)
-        alert.error(`Username: ${error.msg.username.join()}`);
-      if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
-      if (error.msg.password)
-        alert.error(`Password: ${error.msg.password.join()}`);
+      errorNames.forEach(errorName => {
+        if (error.msg[`${errorName}`]) {
+          alert.error(error.msg[`${errorName}`].join());
+        }
+      });
       if (error.msg.non_field_errors) {
         error.msg.non_field_errors.forEach(error => {
           if (error.includes('make a unique set')) {
@@ -39,9 +52,13 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (message !== prevMessage) {
-      if (message && message.passwordNoMatch)
-        alert.error(message.passwordNoMatch);
-      if (message && message.taskDeleted) alert.success(message.taskDeleted);
+      messageNames.forEach(msgName => {
+        if (message && message[`${msgName}`]) {
+          return messageData[`${msgName}`].type === 'error'
+            ? alert.error(message[`${msgName}`])
+            : alert.success(message[`${msgName}`]);
+        }
+      });
     }
   });
 
