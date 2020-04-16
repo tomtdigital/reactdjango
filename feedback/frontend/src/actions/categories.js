@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { GET_CATEGORIES, DELETE_CATEGORY, ADD_CATEGORY } from './types';
 import { tokenConfig } from './auth';
+import { returnErrors } from './messages';
 
 // GET CATEGORIES
 export const getCategories = () => (dispatch, getState) => {
@@ -13,7 +14,9 @@ export const getCategories = () => (dispatch, getState) => {
         payload: res.data,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // DELETE CATEGORIES
@@ -26,7 +29,9 @@ export const deleteCategory = id => (dispatch, getState) => {
         payload: id,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // ADD CATEGORY
@@ -39,5 +44,7 @@ export const addCategory = category => (dispatch, getState) => {
         payload: res.data,
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };

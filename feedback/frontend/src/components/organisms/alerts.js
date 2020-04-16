@@ -7,13 +7,15 @@ const Alerts = ({ error, message }) => {
   const alert = useAlert();
   const [prevError, setPrevError] = useState();
   const [prevMessage, setPrevMessage] = useState();
-  const errorNames = [
+  const trackedFields = [
+    'category_name',
     'category',
     'title',
     'description',
     'username',
     'email',
     'password',
+    'age',
   ];
 
   const messageData = {
@@ -33,9 +35,9 @@ const Alerts = ({ error, message }) => {
 
   useEffect(() => {
     if (prevError !== error) {
-      errorNames.forEach(errorName => {
-        if (error.msg[`${errorName}`]) {
-          alert.error(error.msg[`${errorName}`].join());
+      trackedFields.forEach(field => {
+        if (error.msg[`${field}`]) {
+          alert.error(error.msg[`${field}`].join());
         }
       });
       if (error.msg.non_field_errors) {
