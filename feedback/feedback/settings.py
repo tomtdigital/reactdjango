@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'frontend',
     'django_filters',
     'knox',
-    'accounts'
+    'accounts_api'
 ]
 
 REST_FRAMEWORK = {
