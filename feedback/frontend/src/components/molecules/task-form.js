@@ -9,7 +9,6 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [newCategory, setNewCategory] = useState(false);
 
   useEffect(() => {
     if (task) {
@@ -19,6 +18,12 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
     }
   }, [task]);
 
+  const resetForm = () => {
+    setCategory('');
+    setTitle('');
+    setDescription('');
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     const taskData = { category, title, description };
@@ -27,6 +32,7 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
     } else {
       onSubmit(taskData);
     }
+    resetForm();
   };
 
   const sortObjectArray = useSortObjectArray;
@@ -35,63 +41,20 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {task && categories && categories.length > 0 ? (
-        <>
-          {newCategory ? (
-            <TextInput
-              label="Category"
-              value={category}
-              onChange={setCategory}
-            />
-          ) : (
-            <Select label="Category" value={category} onChange={setCategory}>
-              {sortedCategories.map((subj, index) => (
-                <option key={index} value={subj.category_name}>
-                  {subj.category_name}
-                </option>
-              ))}
-            </Select>
-          )}
-          <button type="button" onClick={() => setNewCategory(!newCategory)}>
-            {newCategory ? 'Use existing' : 'Add new category'}
-          </button>
-          <TextInput label="Title" value={title} onChange={setTitle} />
-          <TextArea
-            label="Description"
-            value={description}
-            onChange={setDescription}
-          />
-          <button type="submit">Submit</button>
-        </>
-      ) : (
-        <>
-          {newCategory ? (
-            <TextInput
-              label="Category"
-              value={category}
-              onChange={setCategory}
-            />
-          ) : (
-            <Select label="Category" value={category} onChange={setCategory}>
-              {sortedCategories.map((subj, index) => (
-                <option key={index} value={subj.category_name}>
-                  {subj.category_name}
-                </option>
-              ))}
-            </Select>
-          )}
-          <button type="button" onClick={() => setNewCategory(!newCategory)}>
-            {newCategory ? 'Use existing' : 'Add new category'}
-          </button>
-          <TextInput label="Title" value={title} onChange={setTitle} />
-          <TextArea
-            label="Description"
-            value={description}
-            onChange={setDescription}
-          />
-          <button type="submit">Submit</button>
-        </>
-      )}
+      <Select label="Category" value={category} onChange={setCategory}>
+        {sortedCategories.map((subj, index) => (
+          <option key={index} value={subj.category_name}>
+            {subj.category_name}
+          </option>
+        ))}
+      </Select>
+      <TextInput label="Title" value={title} onChange={setTitle} />
+      <TextArea
+        label="Description"
+        value={description}
+        onChange={setDescription}
+      />
+      <button type="submit">Submit</button>
     </form>
   );
 };
