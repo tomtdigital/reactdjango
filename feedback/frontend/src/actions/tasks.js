@@ -40,7 +40,7 @@ export const getTask = id => (dispatch, getState) => {
 };
 
 // EDIT TASK
-export const editTask = (task, id) => (dispatch, getState) => {
+export const editTask = (task, id, ownProps) => (dispatch, getState) => {
   axios
     .put(`/api/tasks/${id}/`, task, tokenConfig(getState))
     .then(res => {
@@ -48,6 +48,9 @@ export const editTask = (task, id) => (dispatch, getState) => {
         type: EDIT_TASK,
         payload: res.data,
       });
+    })
+    .then(res => {
+      ownProps.history.push(`/tasks/view-task/${id}`);
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

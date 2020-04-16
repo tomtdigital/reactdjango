@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { editTask, getTask } from '../../actions/tasks';
 import { getCategories } from '../../actions/categories';
 import { useSortObjectArray } from '../../utils/use-sort-object-array';
@@ -20,7 +20,6 @@ export const EditTaskForm = ({
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [newCategory, setNewCategory] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     const taskId = window.location.href.split('edit-task/')[1];
@@ -43,7 +42,6 @@ export const EditTaskForm = ({
     event.preventDefault();
     const taskUpdate = { category, title, description };
     editTaskRdx(taskUpdate, task.id);
-    history.push(`/tasks/view-task/${task.id}`);
   };
 
   const sortObjectArray = useSortObjectArray;
@@ -90,7 +88,7 @@ export const EditTaskForm = ({
 };
 
 EditTaskForm.propTypes = {
-  task: PropTypes.object.isRequired,
+  task: PropTypes.object,
   categories: PropTypes.array.isRequired,
   getTaskRdx: PropTypes.func.isRequired,
   editTaskRdx: PropTypes.func.isRequired,
@@ -102,8 +100,12 @@ const mapStateToProps = state => ({
   task: state.tasks.task,
 });
 
-export default connect(mapStateToProps, {
-  getTaskRdx: getTask,
-  getCategoriesRdx: getCategories,
-  editTaskRdx: editTask,
-})(EditTaskForm);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getTaskRdx: id => dispatch(getTask(id)),
+  getCategoriesRdx: () => dispatch(getCategories()),
+  editTaskRdx: (task, id) => dispatch(editTask(task, id, ownProps)),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(EditTaskForm)
+);
