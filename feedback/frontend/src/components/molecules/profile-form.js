@@ -45,7 +45,7 @@ export const ProfileForm = ({ profile, onSubmit }) => {
 };
 
 ProfileForm.propTypes = {
-  profile: PropTypes.object,
+  profile: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
