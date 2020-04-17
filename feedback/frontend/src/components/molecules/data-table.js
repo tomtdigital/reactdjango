@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Table from '../atoms/table';
 
-const DataTable = ({ data, enableDeletion, onDeletion, linkToItem }) => (
+const DataTable = ({ data, enableDeletion, onDeletion, linkPath }) => (
   <Table>
     <thead>
       <tr>
         {data.columns.map((column, columnIndex) => (
           <th key={columnIndex}>{column}</th>
         ))}
-        {linkToItem && <th>View</th>}
+        {linkPath && <th>View</th>}
         {enableDeletion && <th>Delete</th>}
       </tr>
     </thead>
@@ -20,9 +20,9 @@ const DataTable = ({ data, enableDeletion, onDeletion, linkToItem }) => (
           {row.values.map((value, valueIndex) => (
             <td key={valueIndex}>{value}</td>
           ))}
-          {linkToItem && (
+          {linkPath && (
             <td>
-              <Link to={`/tasks/view-task/${row.id}`}>View</Link>{' '}
+              <Link to={`${linkPath}/${row.id}`}>View</Link>{' '}
             </td>
           )}
           {enableDeletion && (
@@ -40,7 +40,7 @@ const DataTable = ({ data, enableDeletion, onDeletion, linkToItem }) => (
 
 DataTable.propTypes = {
   data: PropTypes.object.isRequired,
-  linkToItem: PropTypes.bool,
+  linkPath: PropTypes.string,
   enableDeletion: PropTypes.bool,
   onDeletion: PropTypes.func,
 };

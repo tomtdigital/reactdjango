@@ -1,37 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addCategory } from '../../actions/categories';
-import Label from '../atoms/label';
+import CategoryFormRdx from '../molecules/category-form';
 
-export const NewCategoryForm = ({ addCategoryRdx }) => {
-  const [categoryName, setCategoryName] = useState();
-
-  const resetForm = () => {
-    setCategoryName('');
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    addCategoryRdx({ category_name: categoryName });
-    resetForm();
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Label htmlFor="category-name">
-        Category Name
-        <input
-          id="category-name"
-          name="category-name"
-          onChange={e => setCategoryName(e.target.value)}
-          value={categoryName || ''}
-        />
-      </Label>
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
+export const NewCategoryForm = ({ addCategoryRdx }) => (
+  <CategoryFormRdx onSubmit={addCategoryRdx} />
+);
 
 NewCategoryForm.propTypes = {
   addCategoryRdx: PropTypes.func.isRequired,

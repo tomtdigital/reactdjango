@@ -14,12 +14,13 @@ const Home = () => (
         <li>
           Refactor front end
           <ul>
-            <li>New category form</li>
+            <li>Edit category page</li>
             <span>Consider user-details-form for...</span>
             <li>Login form</li>
             <li>Registration form</li>
           </ul>
         </li>
+        <li>Map out full UX</li>
         <li>Add next model</li>
       </ul>
       <h3>Post P.O.C</h3>
@@ -31,6 +32,11 @@ const Home = () => (
         <li>Friend requests</li>
         <li>View friends tasks</li>
         <li>Adapt friends tasks</li>
+      </ul>
+      <h3>Ideas</h3>
+      <ul>
+        <li>Add friends</li>
+        <li>Gain rep if people use your tasks</li>
       </ul>
     </Container>
   </Section>

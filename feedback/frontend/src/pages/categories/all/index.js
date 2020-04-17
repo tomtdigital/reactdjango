@@ -1,10 +1,10 @@
 import React from 'react';
-import Section from '../../components/atoms/section';
-import Half from '../../components/atoms/half';
-import FlexWrapper from '../../components/atoms/flex-wrapper';
-import CategoryTableRdx from '../../components/organisms/category-table';
-import NewCategoryFormRdx from '../../components/organisms/new-category-form';
-import Container from '../../components/atoms/container';
+import Section from '../../../components/atoms/section';
+import Half from '../../../components/atoms/half';
+import FlexWrapper from '../../../components/atoms/flex-wrapper';
+import CategoryTableRdx from '../../../components/organisms/category-table';
+import NewCategoryFormRdx from '../../../components/organisms/new-category-form';
+import Container from '../../../components/atoms/container';
 
 const Categories = () => (
   <Section>

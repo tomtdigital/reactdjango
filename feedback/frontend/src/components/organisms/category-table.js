@@ -30,6 +30,7 @@ export const CategoriesTable = ({
       {categories.length > 0 ? (
         <DataTable
           data={tableData}
+          linkPath="/categories/view-category"
           enableDeletion
           onDeletion={deleteCategoryRdx}
         />

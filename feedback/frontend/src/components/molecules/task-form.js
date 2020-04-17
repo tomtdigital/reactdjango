@@ -9,6 +9,9 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const sortObjectArray = useSortObjectArray;
+  const sortedCategories =
+    categories && categories.sort(sortObjectArray('category_name'));
 
   useEffect(() => {
     if (task) {
@@ -17,6 +20,12 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
       setDescription(task.description);
     }
   }, [task]);
+
+  useEffect(() => {
+    if (sortedCategories) {
+      setCategory(sortedCategories[0].category_name);
+    }
+  }, [sortedCategories]);
 
   const resetForm = () => {
     setCategory('');
@@ -35,16 +44,12 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
     resetForm();
   };
 
-  const sortObjectArray = useSortObjectArray;
-  const sortedCategories =
-    categories && categories.sort(sortObjectArray('category_name'));
-
   return (
     <form onSubmit={handleSubmit}>
       <Select label="Category" value={category} onChange={setCategory}>
-        {sortedCategories.map((subj, index) => (
-          <option key={index} value={subj.category_name}>
-            {subj.category_name}
+        {sortedCategories.map((cat, index) => (
+          <option key={index} value={cat.category_name}>
+            {cat.category_name}
           </option>
         ))}
       </Select>

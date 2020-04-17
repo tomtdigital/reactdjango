@@ -22,7 +22,7 @@ export const TaskTable = ({ tasks, getAllTasksRdx, deleteTaskRdx }) => {
       {tasks.length > 0 ? (
         <DataTable
           data={tableData}
-          linkToItem
+          linkPath="/tasks/view-task"
           enableDeletion
           onDeletion={deleteTaskRdx}
         />

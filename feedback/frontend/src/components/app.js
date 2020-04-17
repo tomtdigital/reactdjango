@@ -7,7 +7,9 @@ import AlertTemplate from 'react-alert-template-basic';
 import Alerts from './organisms/alerts';
 import store from '../store';
 import HomePage from '../pages';
-import CategoryPage from '../pages/categories/index';
+import AllCategoriesPage from '../pages/categories/all';
+import ViewCategoryPage from '../pages/categories/view-category';
+import EditCategoryPage from '../pages/categories/edit-category';
 import AllTasksPage from '../pages/tasks/all/index';
 import HeaderNav from './organisms/header-nav';
 import '../styles/styles.css';
@@ -45,8 +47,14 @@ const App = () => {
             <PrivateRoute exact path="/">
               <HomePage />
             </PrivateRoute>
-            <PrivateRoute path="/categories">
-              <CategoryPage />
+            <PrivateRoute path="/categories/all">
+              <AllCategoriesPage />
+            </PrivateRoute>
+            <PrivateRoute path="/categories/view-category">
+              <ViewCategoryPage />
+            </PrivateRoute>
+            <PrivateRoute path="/categories/edit-category">
+              <EditCategoryPage />
             </PrivateRoute>
             <PrivateRoute path="/tasks/all">
               <AllTasksPage />
