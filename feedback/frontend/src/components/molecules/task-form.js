@@ -22,10 +22,10 @@ export const TaskForm = ({ task, categories, onSubmit }) => {
   }, [task]);
 
   useEffect(() => {
-    if (sortedCategories) {
+    if (sortedCategories && !task) {
       setCategory(sortedCategories[0].category_name);
     }
-  }, [sortedCategories]);
+  }, [sortedCategories, task]);
 
   const resetForm = () => {
     setCategory('');
