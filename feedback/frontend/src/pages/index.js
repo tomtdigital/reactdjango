@@ -11,15 +11,6 @@ const Home = () => (
       </Center>
       <h3>To do..</h3>
       <ul>
-        <li>
-          Refactor front end
-          <ul>
-            <li>Edit category page</li>
-            <span>Consider user-details-form for...</span>
-            <li>Login form</li>
-            <li>Registration form</li>
-          </ul>
-        </li>
         <li>Map out full UX</li>
         <li>Add next model</li>
       </ul>
